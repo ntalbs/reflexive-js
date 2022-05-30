@@ -1,0 +1,11 @@
+# Build docker image
+docker build -t reflexive-js
+
+# Tag docker image
+docker tag <image_id> <repository_uri>
+
+# Login to ECR
+aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <repository_uri>
+
+# Push docker image to ECR
+docker push <repository_uri>
