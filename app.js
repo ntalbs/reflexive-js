@@ -31,8 +31,9 @@ async function body(req) {
 }
 
 const server = http.createServer(async (req, res) => {
-  const url = new URL(req.url, `http://${hostname}:${port}`);
   console.info(new Date(), req.method, req.url);
+
+  const url = new URL(req.url, `http://${hostname}:${port}`);
   const echo = {
     "method": req.method,
     "path": url.pathname,
@@ -47,5 +48,5 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(port, () => {
-  console.log(`Server running at http://${hostname}:${port}`);
+  console.log(new Date(), `Server running at http://${hostname}:${port}`);
 });
