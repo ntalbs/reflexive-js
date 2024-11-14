@@ -1,0 +1,16 @@
+version: 0.1
+
+phases:
+  pre_build:
+    commands:
+      - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 884307244203.dkr.ecr.eu-west-1.amazonaws.com/reflexiveinfrastructurestack-reflexivejsreop06dddca5-mk2ca6jlsyrt
+  build:
+    commands:
+      - docker build -t reflexive-js .
+      - docker tag reflexive-js 884307244203.dkr.ecr.eu-west-1.amazonaws.com/reflexiveinfrastructurestack-reflexivejsreop06dddca5-mk2ca6jlsyrt
+  post_build:
+    commands:
+      - docker push 884307244203.dkr.ecr.eu-west-1.amazonaws.com/reflexiveinfrastructurestack-reflexivejsreop06dddca5-mk2ca6jlsyrt
+      - printf '[{"name":<TaskDef>,"imageUri":%s}]' 884307244203.dkr.ecr.eu-west-1.amazonaws.com/reflexiveinfrastructurestack-reflexivejsreop06dddca5-mk2ca6jlsyrt
+artifacts:
+  files: imagedefinitions.json
